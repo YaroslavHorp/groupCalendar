@@ -3,17 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Mój Kalendarz</title>
+
+    <!--FullCalendar styles-->
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-        }
-        #calendar {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-    </style>
+    <!--Styles-->
+    <link href="/static/css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -21,41 +15,7 @@
 <div id='calendar'></div>
 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            locale: 'pl',
-            editable: true,
-            selectable: true,
-            events: '/api/events',
-
-
-            select: function(info) {
-                var title = prompt('Wpisz tytuł nowego wydarzenia:');
-                if (title) {
-                    calendar.addEvent({
-                        title: title,
-                        start: info.startStr,
-                        end: info.endStr,
-                        allDay: info.allDay
-                    });
-
-                }
-                calendar.unselect();
-            }
-        });
-
-        calendar.render();
-    });
-</script>
+<script th:src="@{/js/calendar.js}"></script>
 
 </body>
 </html>
